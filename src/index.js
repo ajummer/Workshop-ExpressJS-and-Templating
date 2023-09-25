@@ -1,21 +1,18 @@
 const express = require("express");
-const handlebars = require("express-handlebars");
-const path = require("path");
+const handlebarsConfig = require("./config/handlebarsConfig.js");
+const expressConfig = require("./config/expressConfig.js");
+const { port } = require("./constans.js");
 
-
+// local variables
 const app = express();
-const port = 3000; 
 
-// Handlebars config
-app.engine("hbs", handlebars.engine({extname: "hbs"}));
-app.set("view engine" , "hbs");
-app.set("views" , "src/views");
+// app configs
+handlebarsConfig(app);
+expressConfig(app);
 
-// Setup static files 
-app.use(express.static(path.resolve(__dirname,"public")));
+// Routing
+app.get("/", (req, res) => {
+  res.render("home");
+});
 
-app.get("/" , (req,res) =>{
-    res.render("home")
-})
-
-app.listen(port , () => console.log(`Server is listening at port ${port}`));
+app.listen(port, () => console.log(`Server is listening at port ${port}`));
