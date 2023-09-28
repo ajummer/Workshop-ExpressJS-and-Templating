@@ -23,3 +23,8 @@ exports.createCube = (cubeData) => {
 exports.getAllCubes = () => {
   return [...cubes];
 };
+
+exports.getSingleCube = (id) => {
+  const cube = cubes.find((cube) => cube.id === id);
+  return cube;
+};

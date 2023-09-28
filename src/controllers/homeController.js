@@ -1,7 +1,9 @@
 const router = require("express").Router();
+const { getAllCubes } = require("../services/cubeService.js");
 
 router.get("/", (req, res) => {
-  res.render("home");
+  const cubes = getAllCubes();
+  res.render("home", { cubes });
 });
 
 router.get("/about", (req, res) => {
@@ -9,7 +11,10 @@ router.get("/about", (req, res) => {
 });
 
 router.get("/404", (req, res) => {
-  res.render("404")
+  res.render("404");
 });
+
+
+
 
 module.exports = router;
